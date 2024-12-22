@@ -1,0 +1,446 @@
+
+/* Root Variables */
+:root {
+--primary-color: #ff4b6e;
+--secondary-color: #ff9a9e;
+--accent-color: #ff85a2;
+--gold: #ffd700;
+--text-dark: #2c1810;
+--white: #ffffff;
+}
+
+/* Base Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background: #000;
+font-family: 'Playfair Display', serif;
+overflow-x: hidden;
+position: relative;
+}
+
+/* Canvas and Container Styles */
+#background-canvas {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+.main-container {
+perspective: 2000px;
+width: 100%;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+margin-top: 90px;
+}
+
+/* Envelope and Container Styles */
+/* .envelope {
+position: relative;
+width: 90%;
+max-width: 900px;
+transform-style: preserve-3d;
+animation: floatEnvelope 6s ease-in-out infinite;
+} */
+
+.envelope {
+position: relative;
+width: 90%;
+max-width: 900px;
+transform-style: preserve-3d;
+animation: floatEnvelope 6s ease-in-out infinite;
+margin-top: -120px;
+}
+
+.container {
+background: rgba(255, 255, 255, 0.98);
+padding: 4rem;
+border-radius: 30px;
+box-shadow: 
+    0 0 30px rgba(255, 75, 110, 0.4),
+    0 0 60px rgba(255, 75, 110, 0.3),
+    0 0 90px rgba(255, 75, 110, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.8);
+position: relative;
+backdrop-filter: blur(10px);
+border: 4px solid rgba(255, 255, 255, 0.3);
+transform-style: preserve-3d;
+animation: unfoldLetter 2.5s ease-out forwards;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: none;
+z-index: 1;
+}
+
+.container::-webkit-scrollbar {
+display: none;
+}
+
+/* Typography Styles */
+h1 {
+font-family: 'Great Vibes', cursive;
+color: var(--primary-color);
+text-align: center;
+font-size: clamp(2.5rem, 5vw, 4rem);
+margin-bottom: 2rem;
+padding: 1.5rem;
+animation: glowText 3s ease-in-out infinite;
+text-shadow: 
+    0 0 10px var(--gold),
+    0 0 20px var(--gold),
+    0 0 30px var(--primary-color),
+    2px 2px 4px rgba(0, 0, 0, 0.5);
+background: rgba(255, 255, 255, 0.15);
+border-radius: 15px;
+position: relative;
+z-index: 2;
+border: 2px solid rgba(255, 215, 0, 0.3);
+box-shadow: 
+    0 0 20px rgba(255, 75, 110, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.5);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+font-weight: 700;
+letter-spacing: 2px;
+}
+
+h1::before {
+content: '';
+position: absolute;
+top: -5px;
+left: -5px;
+right: -5px;
+bottom: -5px;
+background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, rgba(255,75,110,0.1) 50%, transparent 70%);
+z-index: -1;
+border-radius: 20px;
+animation: glowPulse 3s ease-in-out infinite;
+}
+
+p {
+font-size: clamp(1rem, 2vw, 1.4rem);
+line-height: 2;
+margin-bottom: 2.5rem;
+color: var(--text-dark);
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+transform: translateZ(50px);
+opacity: 0;
+animation: revealText 1s forwards;
+}
+
+p::first-letter {
+font-family: 'Great Vibes', cursive;
+font-size: 3.5em;
+color: var(--primary-color);
+float: left;
+margin-right: 10px;
+line-height: 1;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.signature {
+font-family: 'Great Vibes', cursive;
+text-align: right;
+color: var(--primary-color);
+font-size: clamp(2rem, 4vw, 3rem);
+margin-top: 4rem;
+animation: signatureAppear 2s forwards;
+transform: rotate(-5deg) translateZ(30px);
+}
+
+/* Border and Decoration Styles */
+.love-border {
+position: absolute;
+inset: -10px;
+border: 6px solid transparent;
+border-radius: 30px;
+background: linear-gradient(45deg, var(--gold), var(--primary-color), var(--gold)) border-box;
+-webkit-mask: 
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+mask: 
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+-webkit-mask-composite: destination-out;
+mask-composite: exclude;
+animation: rotateBorder 8s linear infinite;
+}
+
+/* Particle Styles */
+.particle {
+position: absolute;
+pointer-events: none;
+animation: particleFall linear infinite;
+opacity: 0.7;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+.container {
+    padding: 3rem;
+}
+
+h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+}
+}
+
+@media (max-width: 768px) {
+.container {
+    padding: 2rem;
+    width: 95%;
+    max-height: 85vh;
+}
+
+.envelope {
+    transform-style: flat;
+    animation: none;
+}
+
+.love-border {
+    inset: -5px;
+    border-width: 3px;
+}
+
+p {
+    transform: none !important;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    margin-bottom: 1.2rem;
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.25);
+}
+}
+
+@media (max-width: 480px) {
+.container {
+    padding: 1.5rem;
+    margin: 0.5rem;
+}
+
+.signature {
+    margin-top: 2rem;
+}
+
+.particle {
+    font-size: 12px !important;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+}
+
+/* Animation Keyframes */
+@keyframes floatEnvelope {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-20px) rotate(2deg); }
+}
+
+@keyframes unfoldLetter {
+0% { transform: scale(0.1) rotateY(180deg); opacity: 0; }
+50% { transform: scale(0.5) rotateY(90deg); opacity: 0.5; }
+100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+}
+
+@keyframes glowText {
+0%, 100% { 
+    color: var(--primary-color);
+    text-shadow: 
+        0 0 10px var(--gold),
+        0 0 20px var(--gold),
+        0 0 30px var(--primary-color),
+        0 0 40px rgba(255, 75, 110, 0.5),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+50% { 
+    color: #ff1a1a;
+    text-shadow: 
+        0 0 20px var(--gold),
+        0 0 30px var(--gold),
+        0 0 40px var(--primary-color),
+        0 0 50px var(--primary-color),
+        0 0 60px rgba(255, 75, 110, 0.7),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+}
+
+@keyframes revealText {
+0% { opacity: 0; transform: translateZ(50px) translateY(50px); }
+100% { opacity: 1; transform: translateZ(50px) translateY(0); }
+}
+
+@keyframes signatureAppear {
+0% { opacity: 0; transform: rotate(-5deg) translateZ(30px) translateX(-100px); }
+100% { opacity: 1; transform: rotate(-5deg) translateZ(30px) translateX(0); }
+}
+
+@keyframes rotateBorder {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+@keyframes particleFall {
+0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes simpleFadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+0%, 100% { 
+    opacity: 0.5;
+    transform: scale(1);
+}
+50% { 
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+}
+
+/* Heart Pump Animation Styles */
+.heart-pump {
+position: fixed;
+pointer-events: none;
+animation: heartPumpOut 0.8s cubic-bezier(0.1, 0.7, 0.5, 1) forwards;
+color: var(--primary-color);
+font-size: 2rem;
+z-index: 9999;
+opacity: 0;
+transform-origin: center;
+}
+
+@keyframes heartPumpOut {
+0% {
+    transform: scale(0);
+    opacity: 1;
+}
+50% {
+    transform: scale(1.4);
+    opacity: 0.8;
+}
+100% {
+    transform: scale(2);
+    opacity: 0;
+}
+}
+
+.music-btn {
+position: fixed;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+width: 60px;
+height: 60px;
+background: rgba(255, 75, 110, 0.9);
+border: none;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 0 20px rgba(255, 75, 110, 0.4);
+z-index: 1000;
+transition: all 0.3s ease;
+}
+
+.music-btn i {
+font-size: 24px;
+color: white;
+transition: all 0.3s ease;
+}
+
+.music-btn::before {
+content: '';
+position: absolute;
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background: var(--gold);
+z-index: -1;
+opacity: 0;
+transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.music-btn:hover {
+transform: translateX(-50%) scale(1.1);
+box-shadow: 
+    0 0 25px rgba(255, 75, 110, 0.6),
+    0 0 45px rgba(201, 153, 90, 0.4);
+}
+
+.music-btn:hover::before {
+opacity: 0.3;
+animation: pulse 1.5s infinite;
+}
+
+/* Playing State */
+.music-btn.playing {
+background: rgba(200, 24, 30, 0.9);
+animation: rotateCenter 4s linear infinite;
+}
+
+.music-btn.playing i {
+animation: musicNote 1s ease infinite;
+}
+
+/* Animations */
+@keyframes pulse {
+0% { transform: scale(1); opacity: 0.3; }
+50% { transform: scale(1.2); opacity: 0.2; }
+100% { transform: scale(1); opacity: 0.3; }
+}
+
+@keyframes rotateCenter {
+from { 
+    transform: translateX(-50%) rotate(0deg);
+}
+to { 
+    transform: translateX(-50%) rotate(360deg);
+}
+}
+
+@keyframes musicNote {
+0% { transform: translateY(0); }
+50% { transform: translateY(-5px); }
+100% { transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+.music-btn {
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.music-btn i {
+    font-size: 20px;
+}
+}
